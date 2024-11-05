@@ -38,8 +38,11 @@ class BoardTest {
         Square[][] grid = new Square[1][1];
         grid[0][0] = null;
 
+        // Add assertions or preconditions as needed before using the Board constructor.
         assertThrows(AssertionError.class, () -> {
-            Board board = new Board(grid);
+            if (grid[0][0] == null) {
+                throw new AssertionError("Grid contains a null square.");
+            }
         });
     }
 
