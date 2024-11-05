@@ -35,6 +35,7 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: xvfb-run ./gradlew build
+
     - name: Generate JaCoCo Badge
       uses: cicirello/jacoco-badge-generator@v2
       with:
