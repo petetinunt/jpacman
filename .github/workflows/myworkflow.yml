@@ -12,6 +12,10 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+    
+permissions:
+  contents: write
+  packages: write
 
 jobs:
   build:
@@ -31,8 +35,27 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: xvfb-run ./gradlew build
+    - name: Generate JaCoCo Badge
+      uses: cicirello/jacoco-badge-generator@v2
+      with:
+        badges-directory: .github/badges
+        generate-coverage-badge: true
+        coverage-badge-filename: jacoco.svg
+        generate-branches-badge: true
+        branches-badge-filename: branches.svg
+        jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
 
-
+    - name: Check badge creation
+      run: ls -l .github/badges
+      
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v9
+      with:
+          default_author: github_actions
+          message: 'Updated JaCoCo badges'
+          add: '.github/badges/*.svg'
+    - name: Show test results
+      run: cat build/reports/jacoco/test/jacocoTestReport.csv
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
