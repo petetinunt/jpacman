@@ -1,15 +1,20 @@
 package nl.tudelft.jpacman.board;
 
-
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+/**
+ * Unit tests for the {@link Board} class.
+ */
 class BoardTest {
 
+    /**
+     * Tests creating a valid board and checks its properties.
+     */
     @Test
     void testValidBoard() {
         Square[][] grid = new Square[1][1];
@@ -23,6 +28,11 @@ class BoardTest {
         assertTrue(board.withinBorders(0, 0));
         assertFalse(board.withinBorders(1, 1));
     }
+
+    /**
+     * Tests creating a board with a null square.
+     * Expects an AssertionError to be thrown.
+     */
     @Test
     void testBoardWithNullSquare() {
         Square[][] grid = new Square[1][1];
@@ -32,6 +42,11 @@ class BoardTest {
             Board board = new Board(grid);
         });
     }
+
+    /**
+     * Tests accessing a square on a board with a null square.
+     * Expects an AssertionError to be thrown.
+     */
     @Test
     void testBoardWithNullSquareSquareAt() {
         Square[][] grid = new Square[1][1];
