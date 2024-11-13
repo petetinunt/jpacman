@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * This is a test class for MapParser.
+ * It contains tests for parsing valid and invalid maps using the MapParser class.
  */
 @ExtendWith(MockitoExtension.class)
 public class MapParserTest {
@@ -33,13 +34,16 @@ public class MapParserTest {
 
     private MapParser mapParser;
 
+    /**
+     * Sets up the test environment before each test.
+     **/
     @BeforeEach
     public void setUp() {
         mapParser = new MapParser(levelFactory, boardFactory);
     }
 
     /**
-     * Test for the parseMap method (good map).
+     * Tests the parseMap method with a valid map.
      */
     @Test
     public void testParseMapGood() {
@@ -60,7 +64,7 @@ public class MapParserTest {
     }
 
     /**
-     * Test for the parseMap method (bad map).
+     * Tests the parseMap method with an invalid map.
      */
     @Test
     public void testParseMapWrong1() {
